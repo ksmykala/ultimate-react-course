@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 
-
 function App() {
   const [step, setStep] = useState(0);
   const [count, setCount] = useState(0);
-  const [targetDate, setTargetDate] = useState("")
+  const [targetDate, setTargetDate] = useState("");
 
   useEffect(() => {
     const currentDate = new Date();
-    const targetDate = new Date(currentDate.getTime() + count * 24 * 60 * 60 * 1000);
-    const month = targetDate.getMonth() + 1;
-    const formattedMonth = month < 10 ? `0${month}` : month;
-    const formattedTargetDate = `${targetDate.getDate()}.${formattedMonth}.${targetDate.getFullYear()}`;
+    const targetDate = new Date(
+      currentDate.getTime() + count * 24 * 60 * 60 * 1000
+    );
+    const formattedTargetDate = `${targetDate.getDate()}.${
+      targetDate.getMonth() + 1
+    }.${targetDate.getFullYear()}`;
     setTargetDate(formattedTargetDate);
   }, [step, count]);
 
   return (
     <div className="main">
       <Counter title="Step" s_value={step} setFunc={setStep} />
-      <Counter title="Count" s_value={count} setFunc={setCount} multiplier={step} />
+      <Counter
+        title="Count"
+        s_value={count}
+        setFunc={setCount}
+        multiplier={step}
+      />
       <div className="counter-row">
         <div className="counter">
-        <h1>{count} days from today is {targetDate}</h1>
+          <h1>
+            <span>
+              {count === 0
+                ? "Today is "
+                : count > 0
+                ? `${count} days from today is `
+                : `${Math.abs(count)} days ago was `}
+            </span>
+            <span>{targetDate}</span>
+          </h1>
         </div>
       </div>
     </div>
