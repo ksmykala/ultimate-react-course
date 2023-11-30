@@ -1,0 +1,23 @@
+.main {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 100vh;
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.counter-row {
+    width: 100vw;
+}
+
+
+
+.counter h1 {
+  margin: 20px;
+}
