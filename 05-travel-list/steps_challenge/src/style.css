@@ -1,0 +1,19 @@
+.main {
+    height: 100vh;
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter-row {
+    width: 100vw;
+}
+
+
+
+.counter h1 {
+  margin: 20px;
+}
