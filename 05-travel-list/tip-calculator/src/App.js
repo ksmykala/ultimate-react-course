@@ -21,11 +21,16 @@ export default function App() {
       <Satisfaction tip={friendsTipPerc} onSelect={setFriendsTipPerc}>
         How did your friend like the service?
       </Satisfaction>
-      <Summary
-        bill={bill}
-        tip={(bill * myTipPerc) / 100 + (bill * friendsTipPerc) / 100}
-      />
-      <Reset onClick={clearTip} />
+
+      {bill > 0 && (
+        <>
+          <Summary
+            bill={bill}
+            tip={(bill * myTipPerc) / 100 + (bill * friendsTipPerc) / 100}
+          />{" "}
+          <Reset onClick={clearTip} />
+        </>
+      )}
     </div>
   );
 }
