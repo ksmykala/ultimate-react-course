@@ -8,10 +8,13 @@ export default function App() {
   const [curFrom, setCurFrom] = useState("USD");
   const [curTo, setCurTo] = useState("EUR");
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(
     function () {
       async function fetchCurrency() {
+        setIsLoading(true);
+
         try {
           setError("");
           const response = await fetch(
@@ -31,6 +34,8 @@ export default function App() {
             setError(error.message);
           }
         }
+
+        setIsLoading(false);
       }
 
       fetchCurrency();
@@ -43,23 +48,33 @@ export default function App() {
       <input
         type="text"
         value={amount}
-        onChange={(e) => setAmount(e.target.value)}
+        onChange={(e) => setAmount(Number(e.target.value))}
       />
-      <select value={curFrom} onChange={(e) => setCurFrom(e.target.value)}>
+      <select
+        value={curFrom}
+        onChange={(e) => setCurFrom(e.target.value)}
+        disabled={isLoading}
+      >
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="CAD">CAD</option>
         <option value="INR">INR</option>
         <option value="PLN">PLN</option>
       </select>
-      <select value={curTo} onChange={(e) => setCurTo(e.target.value)}>
+      <select
+        value={curTo}
+        onChange={(e) => setCurTo(e.target.value)}
+        disabled={isLoading}
+      >
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="CAD">CAD</option>
         <option value="INR">INR</option>
         <option value="PLN">PLN</option>
       </select>
-      <p>{amountOutput}</p>
+      <p>
+        {amountOutput} {curTo}
+      </p>
       {error && <p className="Error">{error}</p>}
     </div>
   );
